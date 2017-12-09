@@ -16,3 +16,11 @@ Intermediate Redux: Middleware
 -	Here is a link to an article about [React Binding Patterns](https://medium.freecodecamp.org/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56)
 
 ----------
+
+react tips
+-------------
+> In general when you need to obtain any type of user input it can be a good idea to using a **form tag**.
+>   
+> It can help you avoid having to define additional events to handle summiting the user input.
+>
+> *Remember*, you will always need to **preventDefault()** when using the **form tag**
