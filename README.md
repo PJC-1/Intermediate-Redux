@@ -7,8 +7,25 @@ Intermediate Redux: Middleware
 > Following **StephenGrider**'s tutorial: *Modern React with Redux* on udemy, here's the [link](https://www.udemy.com/react-redux/).
 > Bellow are a mix of notes from the tutorial, react documentation, and other sources.
 
+.bind(this)
+-------------
+----------
+
+> **Helpful Links**
+>  
+> [redux-promise](https://www.npmjs.com/package/redux-promise) is used to help us handle ajax request inside our application.
+>
+
 
 ----------
+
+Redux-Promise
+-------------
+> **Redux Promise** will stop the action's payload, if the payload property is a **promise**, it will stop the action entirely and once the request finishes it dispatches a new action of the same type but with a payload of the resolved request. In other words, *redux-promise* will unwrap the promise.
+
+----------
+
+
 .bind(this)
 -------------
 >
