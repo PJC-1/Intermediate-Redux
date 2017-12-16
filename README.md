@@ -19,6 +19,28 @@ Intermediate Redux: Middleware
 
 ----------
 
+
+Redux
+-------------
+> In **Redux**, just like *react*, you **never** manipulate *state* directly, but by calling ```setState()``` instead.
+>
+> example:
+>  
+```
+// WRONG
+    return state.push(action.payload.data);
+```
+>
+```
+// RIGHT
+    return state.concat([action.payload.data]);
+```
+> Using ```.concat()``` works because we are return a new version of our state, rather than mutating our state inline.  
+>
+
+
+----------
+
 Redux-Promise
 -------------
 > **Redux Promise** will stop the action's payload, if the payload property is a **promise**, it will stop the action entirely and once the request finishes it dispatches a new action of the same type but with a payload of the resolved request. In other words, *redux-promise* will unwrap the promise.
@@ -41,3 +63,36 @@ react tips
 > It can help you avoid having to define additional events to handle summiting the user input.
 >
 > *Remember*, you will always need to **preventDefault()** when using the **form tag**
+>
+> When you find yourself repeating mark-up, it is most likely a good opportunity to refactor the code into a separate component. To make your code reusable.
+>  
+```
+// instead of repeating mark-up like this
+      <tr key={name}>
+        <td>{name}</td>
+        <td>
+          <Sparklines height={120} width={180} data={temps}>
+            <SparklinesLine color="red" />
+          </Sparklines>
+          <Sparklines height={120} width={180} data={temps}>
+            <SparklinesLine color="red" />
+          </Sparklines>
+          <Sparklines height={120} width={180} data={temps}>
+            <SparklinesLine color="red" />
+          </Sparklines>
+        </td>
+      </tr>
+```
+>
+>
+```
+// you can put that Sparklines code into its own separate component
+
+      <tr key={name}>
+        <td>{name}</td>
+        <td>
+          <Chart data={temps} color="orange" />
+        </td>
+      </tr>
+
+```
