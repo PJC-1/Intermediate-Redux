@@ -17,7 +17,7 @@ class WeatherList extends Component {
         <td><Chart data={pressures} color="green" /></td>
         <td><Chart data={humidities} color="black" /></td>
       </tr>
-    )
+    );
   }
 
   render() {
