@@ -7,11 +7,9 @@ Intermediate Redux: Middleware
 > Following **StephenGrider**'s tutorial: *Modern React with Redux* on udemy, here's the [link](https://www.udemy.com/react-redux/).
 > Bellow are a mix of notes from the tutorial, react documentation, and other sources.
 
-.bind(this)
+Helpful Links
 -------------
 ----------
-
-> **Helpful Links**
 >  
 > [redux-promise](https://www.npmjs.com/package/redux-promise) is used to help us handle ajax request inside our application.
 >
@@ -77,8 +75,64 @@ Redux-Promise
 .bind(this)
 -------------
 >
--	General rule of thumb with *this*, if you're ever passing a callback around as a function. Where the callback has a reference to **this**,  YOU WILL NEED TO **BIND** IT WITH THE CONTEXT.
--	Here is a link to an article about [React Binding Patterns](https://medium.freecodecamp.org/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56)
+> General rule of thumb with *this*, if you're ever passing a callback around as a function. Where the callback has a reference to **this**,  YOU WILL NEED TO **BIND** IT WITH THE CONTEXT.
+>  
+```
+//Example
+
+export default class SearchBar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { term: '' };
+  }
+
+  onInputChange(event) {
+    console.log(event.target.value);
+    this.setState({ term: event.target.value });
+  }
+
+  render() {
+    return (
+      <form className="input-group">
+        <input
+          placeholder="Get a five-day forecast in your favorite cities"
+          className="form-control"
+          value={this.state.term}
+          onChange={this.onInputChange} />
+        <span className="input-group-btn">
+          <button type="submit" className="btn btn-secondary">Submit</button>
+        </span>
+      </form>
+    );
+  }
+}
+```
+>
+> From the code-snippet above, when the ```onChange``` event is triggered, and the ```this.onInputChange``` callback is fired, in the line ```this.setState({ term: event.target.value });``` from the callback, the *this* does **not** have the correct context of *this*. It has the *incorrect* context of *this* because it is not the actual component, so no ```setState()``` method exist on ```this```. The following error message will be output to the dev console when the ```this.onInputChange``` is fired.
+>  
+```
+//from the dev-console
+bundle.js: Uncaught TypeError: Cannot read property 'setState' of undefined
+```
+>
+> To correct this, we need to use ```.bind(this)``` in the component's constructor.
+>
+```
+//from the SearchBar Component
+
+  constructor(props) {
+    super(props);
+
+    this.state = { term: '' };
+
+    this.onInputChange = this.onInputChange.bind(this);
+  }
+```
+>
+> ```this.onInputChange = this.onInputChange.bind(this);``` means that ```this``` in ```this.onInputChange``` refers to the instance of ```SearchBar```, has a function called ```onInputChange```, ```bind``` this function to ```this``` (from ```bind(this)```), which refers to ```SearchBar``` and replace ```onInputChange``` with a new *bound* instance of this function. Essentially, ```bind(this)``` will override the existing function with a new instance of the same function that is bound with the correct context of *this*.
+>
+> Here is a link to an article about [React Binding Patterns](https://medium.freecodecamp.org/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56)
 
 ----------
 
@@ -90,7 +144,15 @@ react tips
 >  When building in React, it is really helpful to do extensive wire framing. To go over the overall structure of the components in your React application.
 > It is good practice to organize the different distinct areas that will respond well to componentization and can be broken down distinct parts.
 >
+> **Controlled Field**
+>    
+>   A *controlled field* is a *form element* where the value of the *input* is set by the *state* of the *component*, and **not** the other way around.
+>   For example, if someone clicks on the *Submit* button, it doesn't check for what is the current value in the *input* at that moment. Instead, it will set declaratively what the value of the *input* is (*i.e.* ```this.state.example```). *Not* imperatively.
+>   In this tutorial, to create a *controlled component*, you need to set the *state* when ever there is a change to the input. In this context, *state* refers to the *component's state* rather than the *application state*.
 >   
+
+----------
+
 > In general when you need to obtain any type of user input it can be a good idea to using a **form tag**.
 >   
 > It can help you avoid having to define additional events to handle summiting the user input.
