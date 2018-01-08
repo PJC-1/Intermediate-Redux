@@ -19,6 +19,32 @@ Intermediate Redux: Middleware
 
 ----------
 
+Container or Component
+-------------
+----------
+>
+> Here is a helpful [article](http://www.thegreatcodeadventure.com/the-react-plus-redux-container-pattern/) by Sophie DeBenedetto that explains *container*/*component* pattern in **React**.
+>
+> **Container**
+>  
+>  A *container component* is a component that is responsible for retrieving data, and in order to get that data, the component needs to use *Redux's* ```connect``` and ```mapStateToProps``` functions.
+>   
+> A *container component* will grab data from state via ```mapStateToProps```. The component will then pass necessary portions of that data down to its children as ```props```.
+>  
+> A *container component* is also responsible for dispatching *actions* that make changes to *application state*.
+>  
+> **Component (Presentational Component)**
+>
+> A *presentational component* simply receives that data from its parent container and displays it.
+>
+> **Callback Functions as Props**
+>
+> A function can be defined in a *container component* that dispatches an action. Such a function will be passed as *prop* to a child (*presentational component*), and triggered via a *callback*, in response to a users' interaction.
+>  
+>
+
+----------
+
 
 Redux
 -------------
@@ -58,6 +84,13 @@ Redux-Promise
 
 react tips
 -------------
+>
+> **Component Design**
+>  
+>  When building in React, it is really helpful to do extensive wire framing. To go over the overall structure of the components in your React application.
+> It is good practice to organize the different distinct areas that will respond well to componentization and can be broken down distinct parts.
+>
+>   
 > In general when you need to obtain any type of user input it can be a good idea to using a **form tag**.
 >   
 > It can help you avoid having to define additional events to handle summiting the user input.
