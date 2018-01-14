@@ -144,6 +144,37 @@ react tips
 >  When building in React, it is really helpful to do extensive wire framing. To go over the overall structure of the components in your React application.
 > It is good practice to organize the different distinct areas that will respond well to componentization and can be broken down distinct parts.
 >
+
+
+>
+>**refs system**
+>
+> In *react* **refs** are used to get reference to a *DOM* node or an instance of a component in a *React Application* i.e. refs would return the node we are *referencing*.
+>
+>  If the *ref* points to a standard component (DOM node, such as input, select, div etc...) then to retrieve the element; you just need to call ```this.refs.ref```.
+>
+>  Use of 'ref' should only be used if it is necessary because:
+- It hinders *Babel's* performance.
+- Using *refs* somewhat moves away from the react way of thinking which is once state changes, you re-render all the components of your UI that depend on that state. React will take care of making sure only the right bits of the DOM are updated, making the whole thing efficient. You may eventually use refs in a Jquery fashion which is not the goal.
+>
+> When should you use 'refs'?
+- Managing focus, text selection, or media playback.
+- Triggering imperative animations.
+- Integrating with third-party DOM libraries.
+>  
+>  As a general rule: "Avoid using refs for anything can be done declaratively."
+>  
+>  Avoid Inline ref callbacks, arrow and bind functions in a render() produce a performance hit by creating a new function on **every** re-render.
+>  
+>  Using **string refs** intentionally which is also not a good practice. According to official react docs, although string refs are not deprecated, they are considered legacy, and will likely be deprecated at some point in the future. **Callback refs** are preferred.
+>   
+>   Refs should not be used on **functional components** because they don't have instances.
+>   But *ref* attribute will work inside a functional component as long as you refer to a DOM element or a class component.
+>  
+> Here is a good [article](https://hackernoon.com/refs-in-react-all-you-need-to-know-fb9c9e2aeb81) by *hackernoon* that explains refs in react.
+>
+
+>  
 > **Controlled Field**
 >    
 >   A *controlled field* is a *form element* where the value of the *input* is set by the *state* of the *component*, and **not** the other way around.
